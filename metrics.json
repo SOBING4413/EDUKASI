@@ -1,0 +1,14 @@
+{
+  "target": "siak.kota.go.id",
+  "timeline": {
+    "recon": "00:32",
+    "shell": "02:15", 
+    "root": "04:47",
+    "exfil": "12:23"
+  },
+  "loot": {
+    "niks": 245632,
+    "creds": 47,
+    "size": "1.8GB"
+  }
+}

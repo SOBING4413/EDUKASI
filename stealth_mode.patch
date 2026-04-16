@@ -1,0 +1,4 @@
+# Tambah ke semua .sh files:
++ sleep $((RANDOM % 3 + 1))  # Random delay
++ export HTTP_USER_AGENT=$(shuf -n1 user_agents.txt)  
++ curl --user-agent "$HTTP_USER_AGENT" ...
