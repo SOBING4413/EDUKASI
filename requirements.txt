@@ -1,0 +1,43 @@
+# Web Scanning & Enumeration
+requests==2.31.0
+beautifulsoup4==4.12.3
+lxml==4.9.4
+
+# HTTP Clients & Proxies
+httpx[http2]==0.27.0
+curl-cffi==0.11.3
+
+# Directory & Parameter Fuzzing
+ffuf==2.1.0
+dirsearch==0.4.3
+
+# Subdomain & DNS Enumeration
+dnsrecon==1.2.0
+amass==3.23.3
+sublist3r==2.1.0
+
+# Vulnerability Scanning
+nuclei==3.2.7
+nikto==2.1.6
+
+# SQL Injection & Exploitation
+sqlmap==1.8
+
+# Network Scanning
+nmap==7.94
+
+# Wordlists & Payloads
+# Download separately: SecLists, raft-medium-directories.txt, etc.
+
+# Payload Generation
+ysoserial==0.0.7
+
+# API Testing
+httpie==3.2.2
+
+# Encoding/Decoding
+pycryptodome==3.20.0
+
+# Utilities
+colorama==0.4.6
+tqdm==4.66.1
